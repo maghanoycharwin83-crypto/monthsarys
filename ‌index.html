@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1 Year & 10 Months 💗</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Dancing+Script:wght@500;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   1 YEAR & 10 MONTHS — design tokens
+   ============================================ */
+:root{
+  --wine-deep:#2b0a1a; --wine-mid:#4a1128; --wine-soft:#6e1f3c;
+  --blush:#f7d9df; --cream:#fdf3ec; --gold:#d4af7a; --gold-bright:#e9c98f;
+  --rose:#c9184a; --text-dark:#3a1220; --shadow:rgba(15,2,8,0.55);
+  --font-display:'Playfair Display',Georgia,serif;
+  --font-script:'Dancing Script',cursive;
+  --font-body:'Poppins','Segoe UI',sans-serif;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  min-height:100vh; font-family:var(--font-body); color:var(--cream);
+  background:
+    radial-gradient(circle at 20% 15%, rgba(233,201,143,0.10), transparent 45%),
+    radial-gradient(circle at 80% 85%, rgba(201,24,74,0.18), transparent 50%),
+    linear-gradient(160deg, var(--wine-deep) 0%, var(--wine-mid) 55%, var(--wine-soft) 100%);
+  overflow-x:hidden; position:relative;
+}
+.ambient{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0;}
+.ambient span{position:absolute;bottom:-10%;font-size:1.4rem;color:var(--rose);opacity:.35;
+  filter:drop-shadow(0 0 6px rgba(201,24,74,.5));animation:drift linear infinite;}
+@keyframes drift{
+  0%{transform:translateY(0) translateX(0) rotate(0deg);opacity:0;}
+  10%{opacity:.45;} 90%{opacity:.35;}
+  100%{transform:translateY(-115vh) translateX(var(--drift-x,20px)) rotate(360deg);opacity:0;}
+}
+.section{display:none;position:relative;z-index:1;min-height:100vh;flex-direction:column;
+  align-items:center;padding:6vh 5vw 8vh;}
+.section.active{display:flex;}
+.eyebrow{letter-spacing:.35em;text-transform:uppercase;font-size:.7rem;color:var(--gold-bright);
+  opacity:.85;margin-bottom:.6rem;text-align:center;}
+h1.title{font-family:var(--font-display);font-weight:600;font-size:clamp(1.9rem,5vw,3.2rem);
+  text-align:center;color:var(--cream);margin:0 0 .3rem;text-shadow:0 4px 24px var(--shadow);}
+.subtitle{font-family:var(--font-script);font-size:clamp(1.2rem,3vw,1.6rem);color:var(--blush);
+  text-align:center;margin:0 0 2.4rem;}
+.top-nav{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;
+  width:100%;max-width:1000px;margin-bottom:2.5rem;}
+.back-link{font-size:.85rem;color:var(--gold-bright);text-decoration:none;border:1px solid rgba(233,201,143,0.4);
+  padding:.5rem 1.1rem;border-radius:999px;transition:all .25s ease;letter-spacing:.05em;cursor:pointer;
+  background:none;font-family:var(--font-body);}
+.back-link:hover{background:rgba(233,201,143,0.12);border-color:var(--gold-bright);transform:translateY(-2px);}
+.counter-badge{font-family:var(--font-script);font-size:1.3rem;color:var(--gold-bright);}
+
+/* ---------- LOGIN ---------- */
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;
+  z-index:1;perspective:1200px;}
+.locket{position:relative;width:min(92vw,380px);aspect-ratio:1/1.02;transform-style:preserve-3d;
+  transition:transform .15s ease-out;filter:drop-shadow(0 25px 45px var(--shadow));}
+.locket-face{position:absolute;inset:0;clip-path:url(#heartClip);-webkit-clip-path:url(#heartClip);
+  background:radial-gradient(circle at 35% 28%, rgba(255,255,255,0.12), transparent 55%),
+  linear-gradient(160deg, var(--wine-soft), var(--wine-deep) 70%);
+  border:3px solid var(--gold);box-shadow:inset 0 0 40px rgba(233,201,143,0.15);
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+  padding:3.4rem 2.4rem 5.5rem;transform:translateZ(20px);}
+.locket-heart{font-size:2.4rem;color:var(--rose);margin-bottom:.6rem;
+  filter:drop-shadow(0 0 14px rgba(201,24,74,.65));animation:pulse 2.4s ease-in-out infinite;
+  display:inline-block;}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.12);}}
+.locket-heart.impact{animation:heartImpact .6s ease;}
+@keyframes heartImpact{
+  0%{transform:scale(1) rotate(0deg);}
+  25%{transform:scale(1.55) rotate(-10deg);}
+  50%{transform:scale(0.88) rotate(8deg);}
+  70%{transform:scale(1.12) rotate(-4deg);}
+  100%{transform:scale(1) rotate(0deg);}
+}
+
+/* ---------- cupid arrow ---------- */
+.cupid-arrow{
+  position:fixed;
+  top:50%; left:50%;
+  width:190px; height:28px;
+  margin:-14px 0 0 -95px;
+  opacity:0;
+  pointer-events:none;
+  z-index:60;
+  transform:translate(150vw,-70vh) rotate(145deg) scale(0.8);
+}
+.cupid-arrow .arrow-shaft{stroke:var(--gold-bright);}
+.cupid-arrow .arrow-tip{fill:var(--rose);}
+.cupid-arrow .arrow-feather{fill:var(--gold-bright);}
+.cupid-arrow.fly{
+  animation:arrowFly .85s cubic-bezier(.22,.68,.24,1) forwards;
+}
+@keyframes arrowFly{
+  0%{transform:translate(150vw,-70vh) rotate(145deg) scale(0.8);opacity:0;}
+  14%{opacity:1;}
+  78%{transform:translate(0,0) rotate(145deg) scale(1);opacity:1;}
+  100%{transform:translate(0,0) rotate(145deg) scale(1.3);opacity:0;}
+}
+
+.impact-burst{
+  position:absolute;
+  top:22%; left:50%;
+  width:90px; height:90px;
+  margin:-45px 0 0 -45px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(233,201,143,0.85) 0%, rgba(201,24,74,0.55) 45%, transparent 72%);
+  opacity:0;
+  pointer-events:none;
+  transform:scale(0.2);
+  z-index:5;
+}
+.impact-burst.show{
+  animation:burstPop .6s ease-out forwards;
+}
+@keyframes burstPop{
+  0%{transform:scale(0.2);opacity:.95;}
+  60%{opacity:.55;}
+  100%{transform:scale(2.6);opacity:0;}
+}
+.locket h1{font-family:var(--font-display);font-size:1.35rem;margin:.2rem 0 .1rem;text-align:center;color:var(--cream);}
+.locket p.script{font-family:var(--font-script);font-size:1.3rem;color:var(--gold-bright);margin:0 0 1.3rem;}
+.pw-form{width:100%;display:flex;flex-direction:column;gap:.7rem;align-items:center;}
+.pw-form input{width:100%;text-align:center;letter-spacing:.3em;font-size:1.05rem;padding:.75rem 1rem;
+  border-radius:12px;border:1px solid rgba(233,201,143,0.5);background:rgba(0,0,0,0.2);color:var(--cream);
+  outline:none;font-family:var(--font-body);transition:border-color .2s ease, box-shadow .2s ease;}
+.pw-form input::placeholder{color:rgba(253,243,236,0.4);letter-spacing:.1em;}
+.pw-form input:focus{border-color:var(--gold-bright);box-shadow:0 0 0 3px rgba(233,201,143,0.18);}
+.pw-form button{width:100%;padding:.8rem 1rem;border:none;border-radius:12px;
+  background:linear-gradient(120deg, var(--rose), #8f1237);color:var(--cream);font-weight:600;
+  letter-spacing:.08em;cursor:pointer;box-shadow:0 10px 25px rgba(201,24,74,0.35);
+  transition:transform .18s ease, box-shadow .18s ease;font-family:var(--font-body);}
+.pw-form button:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(201,24,74,0.45);}
+.pw-form button:active{transform:translateY(0);}
+.error-msg{min-height:1.2em;font-size:.82rem;color:#ffb4c4;text-align:center;}
+
+/* ---------- HOME ---------- */
+.choice-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.8rem;width:100%;
+  max-width:980px;perspective:1400px;}
+@media (max-width:760px){.choice-grid{grid-template-columns:1fr;max-width:400px;}}
+.tilt-card{position:relative;border-radius:20px;background:linear-gradient(160deg, rgba(255,255,255,0.06), rgba(0,0,0,0.18));
+  border:1px solid rgba(233,201,143,0.35);padding:2.6rem 1.6rem 2.2rem;text-align:center;text-decoration:none;
+  color:var(--cream);transform-style:preserve-3d;transition:transform .12s ease-out, box-shadow .25s ease, border-color .25s ease;
+  box-shadow:0 18px 40px var(--shadow);overflow:hidden;cursor:pointer;display:block;}
+.tilt-card::before{content:"";position:absolute;inset:0;
+  background:radial-gradient(circle at 50% 0%, rgba(233,201,143,0.16), transparent 60%);
+  opacity:0;transition:opacity .3s ease;}
+.tilt-card:hover{border-color:var(--gold-bright);box-shadow:0 26px 55px var(--shadow);}
+.tilt-card:hover::before{opacity:1;}
+.tilt-card .icon{font-size:2.6rem;margin-bottom:1rem;display:block;transform:translateZ(30px);
+  filter:drop-shadow(0 8px 14px rgba(0,0,0,0.4));}
+.tilt-card h2{font-family:var(--font-display);font-size:1.35rem;margin:0 0 .4rem;transform:translateZ(25px);}
+.tilt-card p{font-family:var(--font-script);font-size:1.15rem;color:var(--blush);margin:0;transform:translateZ(20px);}
+.logout-link{margin-top:3rem;font-size:.8rem;color:rgba(253,243,236,0.55);text-decoration:underline;
+  cursor:pointer;background:none;border:none;font-family:var(--font-body);}
+
+/* ---------- GALLERY ---------- */
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1.3rem;
+  width:100%;max-width:1100px;}
+.photo-card{position:relative;aspect-ratio:4/5;border-radius:14px;overflow:hidden;
+  border:2px solid rgba(233,201,143,0.3);background:linear-gradient(160deg, rgba(255,255,255,0.05), rgba(0,0,0,0.25));
+  cursor:pointer;transform-style:preserve-3d;transition:transform .15s ease-out, border-color .25s ease, box-shadow .25s ease;
+  box-shadow:0 10px 25px var(--shadow);}
+.photo-card:hover{border-color:var(--gold-bright);box-shadow:0 18px 38px var(--shadow);}
+.photo-card img{width:100%;height:100%;object-fit:cover;display:block;}
+.photo-card .num{position:absolute;top:8px;left:10px;font-family:var(--font-script);font-size:1.05rem;
+  color:var(--gold-bright);text-shadow:0 2px 6px rgba(0,0,0,0.6);}
+.photo-card .placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:.4rem;color:rgba(253,243,236,0.55);font-size:.75rem;text-align:center;padding:.5rem;}
+.photo-card .placeholder .heart-outline{font-size:1.6rem;opacity:.5;}
+.lightbox{position:fixed;inset:0;background:rgba(10,2,6,0.88);display:none;align-items:center;
+  justify-content:center;z-index:50;padding:5vh 5vw;}
+.lightbox.open{display:flex;}
+.lightbox-inner{position:relative;max-width:min(90vw,700px);max-height:85vh;transform-style:preserve-3d;
+  animation:flipIn .4s ease;}
+@keyframes flipIn{from{transform:rotateY(90deg);opacity:0;}to{transform:rotateY(0deg);opacity:1;}}
+.lightbox-inner img{width:100%;max-height:85vh;object-fit:contain;border-radius:12px;border:3px solid var(--gold);
+  box-shadow:0 30px 70px rgba(0,0,0,0.6);}
+.lightbox-close{position:absolute;top:-2.6rem;right:0;background:none;border:none;color:var(--cream);
+  font-size:1.8rem;cursor:pointer;line-height:1;}
+
+/* ---------- VIDEOS ---------- */
+.video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.6rem;
+  width:100%;max-width:1000px;}
+.video-card{border-radius:16px;overflow:hidden;border:2px solid rgba(233,201,143,0.3);
+  background:rgba(0,0,0,0.2);box-shadow:0 14px 30px var(--shadow);transition:transform .15s ease-out, border-color .25s ease;}
+.video-card:hover{border-color:var(--gold-bright);}
+.video-card video{width:100%;display:block;aspect-ratio:16/9;background:#000;}
+.video-card .video-label{padding:.8rem 1rem 1rem;font-family:var(--font-script);font-size:1.15rem;
+  color:var(--blush);text-align:center;}
+.video-placeholder{aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:.5rem;color:rgba(253,243,236,0.55);font-size:.8rem;text-align:center;padding:1rem;}
+.video-placeholder .heart-outline{font-size:1.8rem;opacity:.5;}
+
+/* ---------- LETTER ---------- */
+.envelope-scene{perspective:1600px;width:min(92vw,640px);margin-bottom:1rem;}
+.envelope{position:relative;transform-style:preserve-3d;}
+.paper{position:relative;background:repeating-linear-gradient(var(--cream), var(--cream) 34px, rgba(58,18,32,0.06) 35px);
+  color:var(--text-dark);border-radius:6px;padding:2.6rem 2.2rem 3rem;box-shadow:0 30px 70px var(--shadow);
+  transform-origin:top center;animation:unfold .9s cubic-bezier(.2,.9,.25,1) both;border:1px solid rgba(0,0,0,0.06);}
+@keyframes unfold{from{transform:rotateX(-35deg) translateY(-30px);opacity:0;}to{transform:rotateX(0deg) translateY(0);opacity:1;}}
+.paper .stamp{position:absolute;top:1.2rem;right:1.4rem;font-size:1.8rem;color:var(--rose);opacity:.7;transform:rotate(8deg);}
+.paper .letter-heading{font-family:var(--font-script);font-size:1.6rem;color:var(--rose);margin:0 0 1.2rem;}
+.paper .letter-body{font-family:var(--font-script);font-size:1.28rem;line-height:2.15;color:var(--text-dark);}
+.paper .letter-body p{margin:0 0 1.3rem;}
+.paper .signature{font-family:var(--font-script);font-size:1.9rem;color:var(--rose);text-align:right;margin-top:1.5rem;}
+@media (max-width:600px){.paper{padding:2rem 1.3rem 2.4rem;}.paper .letter-body{font-size:1.12rem;line-height:1.95;}}
+footer.tiny-note{margin-top:3rem;font-size:.7rem;color:rgba(253,243,236,0.4);text-align:center;letter-spacing:.05em;}
+</style>
+</head>
+<body>
+
+<div class="ambient"></div>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <clipPath id="heartClip" clipPathUnits="objectBoundingBox">
+      <path d="M0.5,1 C0.5,1 0,0.62 0,0.33 C0,0.13 0.16,0 0.34,0 C0.45,0 0.5,0.07 0.5,0.16 C0.5,0.07 0.55,0 0.66,0 C0.84,0 1,0.13 1,0.33 C1,0.62 0.5,1 0.5,1 Z"/>
+    </clipPath>
+  </defs>
+</svg>
+
+<!-- ================= LOGIN ================= -->
+<section id="screen-login" class="section active" style="display:flex;">
+  <svg class="cupid-arrow" id="cupid-arrow" viewBox="0 0 190 28" xmlns="http://www.w3.org/2000/svg">
+    <line x1="14" y1="14" x2="165" y2="14" class="arrow-shaft" stroke-width="3" stroke-linecap="round"/>
+    <polygon points="165,4 190,14 165,24" class="arrow-tip"/>
+    <polygon points="14,6 26,14 14,10" class="arrow-feather"/>
+    <polygon points="14,22 26,14 14,18" class="arrow-feather"/>
+  </svg>
+
+  <div class="login-wrap">
+    <div class="locket" id="locket">
+      <div class="locket-face">
+        <div class="impact-burst" id="impact-burst"></div>
+        <span class="locket-heart" id="locket-heart-emoji">💗</span>
+        <h1>Our Little Locket</h1>
+        <p class="script">enter the date it started to unlock</p>
+        <form class="pw-form" id="login-form">
+          <input type="password" id="pw-input" placeholder="• • • • • •" inputmode="numeric"
+                 autocomplete="off" maxlength="10" required>
+          <button type="submit">Unlock</button>
+          <div class="error-msg" id="login-error"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOME ================= -->
+<section id="screen-home" class="section">
+  <div class="eyebrow">Happy</div>
+  <h1 class="title">1 Year &amp; 10 Months of Love</h1>
+  <p class="subtitle">welcome back, prettiest girl 💗</p>
+
+  <div class="choice-grid">
+    <div class="tilt-card" data-goto="screen-images">
+      <span class="icon">📷</span><h2>Images</h2><p>15 memories, saved forever</p>
+    </div>
+    <div class="tilt-card" data-goto="screen-letter">
+      <span class="icon">💌</span><h2>Letter</h2><p>read this when you're free</p>
+    </div>
+    <div class="tilt-card" data-goto="screen-videos">
+      <span class="icon">🎬</span><h2>Videos</h2><p>3 little clips of us</p>
+    </div>
+  </div>
+
+  <button class="logout-link" id="logout-btn">lock this again</button>
+  <footer class="tiny-note">this page is yours to keep, my love</footer>
+</section>
+
+<!-- ================= IMAGES ================= -->
+<section id="screen-images" class="section">
+  <div class="top-nav">
+    <button class="back-link" data-goto="screen-home">← back</button>
+    <span class="counter-badge">15 memories</span>
+  </div>
+  <div class="eyebrow">A little album</div>
+  <h1 class="title">Our Photos</h1>
+  <p class="subtitle">tan-awa ni kung mo miss ka nako 💗</p>
+  <div class="gallery-grid" id="gallery">
+
+    <div class="photo-card" onclick="openLightbox('a.jpg')">
+      <span class="num">01</span>
+      <img src="a.jpg" alt="Memory 1" loading="lazy"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="placeholder" style="display:none;"><span class="heart-outline">♡</span><span>add a.jpg<br>to </span></div>
+    </div>
+
+    <div class="photo-card" onclick="openLightbox('b.jpg')">
+      <span class="num">02</span>
+      <img src="b.jpg" alt="Memory 2" loading="lazy"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="placeholder" style="display:none;"><span class="heart-outline">♡</span><span>add b.jpg<br>to </span></div>
+    </div>
+
+    <div class="photo-card" onclick="openLightbox('c.jpg')">
+      <span class="num">03</span>
+      <img src="c.jpg" alt="Memory 3" loading="lazy"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="placeholder" style="display:none;"><span class="heart-outline">♡</span><span>add c.jpg<br>to </span></div>
+    </div>
+
+    <div class="photo-card" onclick="openLightbox('d.jpg')">
+      <span class="num">04</span>
+      <img src="d.jpg" alt="Memory 4" loading="lazy"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="placeholder" style="display:none;"><span class="heart-outline">♡</span><span>add d.jpg<br>to </span></div>
+    </div>
+
+    <div class="photo-card" onclick="openLightbox('e.jpg')">
+      <span class="num">05</span>
+      <img src="e.jpg" alt="Memory 5" loading="lazy"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="placeholder" style="display:none;"><span class="heart-outline">♡</span><span>add e.jpg<br>to </span></div>
+    </div>
+
+    <div class="photo-card" onclick="openLightbox('f.jpg')">
+      <span class="num">06</span>
+      <img src="f.jpg" alt="Memory 6" loading="lazy"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="placeholder" style="display:none;"><span class="heart-outline">♡</span><span>add f.jpg<br>to </span></div>
+    </div>
+
+    <div class="photo-card" onclick="openLightbox('g.jpg')">
+      <span class="num">07</span>
+      <img src="g.jpg" alt="Memory 7" loading="lazy"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="placeholder" style="display:none;"><span class="heart-outline">♡</span><span>add g.jpg<br>to </span></div>
+    </div>
+
+    <div class="photo-card" onclick="openLightbox('h.jpg')">
+      <span class="num">08</span>
+      <img src="h.jpg" alt="Memory 8" loading="lazy"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="placeholder" style="display:none;"><span class="heart-outline">♡</span><span>add h.jpg<br>to </span></div>
+    </div>
+
+    <div class="photo-card" onclick="openLightbox('i.jpg')">
+      <span class="num">09</span>
+      <img src="i.jpg" alt="Memory 9" loading="lazy"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="placeholder" style="display:none;"><span class="heart-outline">♡</span><span>add i.jpg<br>to </span></div>
+    </div>
+
+    <div class="photo-card" onclick="openLightbox('j.jpg')">
+      <span class="num">10</span>
+      <img src="j.jpg" alt="Memory 10" loading="lazy"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="placeholder" style="display:none;"><span class="heart-outline">♡</span><span>add j.jpg<br>to </span></div>
+    </div>
+
+    <div class="photo-card" onclick="openLightbox('k.jpg')">
+      <span class="num">11</span>
+      <img src="k.jpg" alt="Memory 11" loading="lazy"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="placeholder" style="display:none;"><span class="heart-outline">♡</span><span>add k.jpg<br>to </span></div>
+    </div>
+
+    <div class="photo-card" onclick="openLightbox('m.jpg')">
+      <span class="num">12</span>
+      <img src="m.jpg" alt="Memory 12" loading="lazy"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="placeholder" style="display:none;"><span class="heart-outline">♡</span><span>add m.jpg<br>to </span></div>
+    </div>
+
+    <div class="photo-card" onclick="openLightbox('n.jpg')">
+      <span class="num">13</span>
+      <img src="n.jpg" alt="Memory 13" loading="lazy"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="placeholder" style="display:none;"><span class="heart-outline">♡</span><span>add n.jpg<br>to </span></div>
+    </div>
+
+    <div class="photo-card" onclick="openLightbox('o.jpg')">
+      <span class="num">14</span>
+      <img src="o.jpg" alt="Memory 14" loading="lazy"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="placeholder" style="display:none;"><span class="heart-outline">♡</span><span>add o.jpg<br>to </span></div>
+    </div>
+
+    <div class="photo-card" onclick="openLightbox('p.jpg')">
+      <span class="num">15</span>
+      <img src="p.jpg" alt="Memory 15" loading="lazy"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="placeholder" style="display:none;"><span class="heart-outline">♡</span><span>add p.jpg<br>to </span></div>
+    </div>
+
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" id="lightbox-close-btn">✕</button>
+    <img id="lightbox-img" src="" alt="memory">
+  </div>
+</div>
+
+<!-- ================= VIDEOS ================= -->
+<section id="screen-videos" class="section">
+  <div class="top-nav">
+    <button class="back-link" data-goto="screen-home">← back</button>
+    <span class="counter-badge">3 clips</span>
+  </div>
+  <div class="eyebrow">Moving memories</div>
+  <h1 class="title">Our Videos</h1>
+  <p class="subtitle">mao ni ang mga clips nga akong ge save 💗</p>
+
+  <div class="video-grid" id="videoGrid">
+
+    <div class="video-card">
+      <video controls preload="metadata"
+             onerror="this.style.display='none'; this.nextElementSibling.querySelector('.vplaceholder').style.display='flex';">
+        <source src="l.mp4" type="video/mp4">
+      </video>
+      <div>
+        <div class="vplaceholder video-placeholder" style="display:none;"><span class="heart-outline">♡</span><span>add l.mp4<br>to </span></div>
+        <div class="video-label">clip one 💗</div>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <video controls preload="metadata"
+             onerror="this.style.display='none'; this.nextElementSibling.querySelector('.vplaceholder').style.display='flex';">
+        <source src="r.mp4" type="video/mp4">
+      </video>
+      <div>
+        <div class="vplaceholder video-placeholder" style="display:none;"><span class="heart-outline">♡</span><span>add r.mp4<br>to </span></div>
+        <div class="video-label">clip two 💗</div>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <video controls preload="metadata"
+             onerror="this.style.display='none'; this.nextElementSibling.querySelector('.vplaceholder').style.display='flex';">
+        <source src="s.mp4" type="video/mp4">
+      </video>
+      <div>
+        <div class="vplaceholder video-placeholder" style="display:none;"><span class="heart-outline">♡</span><span>add s.mp4<br>to </span></div>
+        <div class="video-label">clip three 💗</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= LETTER ================= -->
+<section id="screen-letter" class="section">
+  <div class="top-nav">
+    <button class="back-link" data-goto="screen-home">← back</button>
+    <span class="counter-badge">read slowly 💗</span>
+  </div>
+  <div class="envelope-scene">
+    <div class="envelope">
+      <div class="paper">
+        <span class="stamp">💗</span>
+        <p class="letter-heading">To the prettiest girl,</p>
+        <div class="letter-body">
+          <p>Hi lang. Good morning. Happy 22 months of love lang — gatuo kag walay later no? atong una imo rabang gi open HAHAHAHA. This is the best surprise nga akong gihimo para nimo. kato atong una dli to mao.</p>
+          <p>Ahmm, gusto ko lang mo-thank you sa tanan, sa pag love nimo sa akoa, sa pag-hatag sa akong mga ganahan lang, for me igo na gyud ka para sa akoa lang, dili na kinahanglan mag-worry. Gihimo nako ni nga website para mahatagan ka og pinakanindot nga mga memories. Ang link, i-save lang nimo — naa diri ang atong mga litrato, ug kung mabulag man ta, dili ka makalimot nako, kay dili man ni ma-delete. HAHAHAHAH. ma delete diay og akong e delete HAHAHA.</p>
+          <p>Sorry sa mga times nga dili ko kasabot nimo, usahay madugangan pa imong sapot, dugay kaayo ka mo-ayo kung masuko raba"ma-pride ka boss?" HAHAHAH.</p>
+          <p>Nindot na unta atong una imo pd gi open HAHAHAH pero this time nag gama na gyud kog new kiligon na tingali ka ani ba HAHAHAHAH</p>
+          <p>uhmmm Hi, prettiest girl, akong love — pero ika-duha ra diay ka sa pinakagwapa nga akong na-ilhan lang, number one diay si Mama. HAHAHAH.</p>
+          <p>I think that's enough na lang, kiligon pa lang ka mag-basa. HAHAHAH. I love you so much, my love 💗 Pila ka kiss ganahan nimo? And once again, happy 1 year and 10 months lang 💗</p>
+        </div>
+        <p class="signature">forever yours 💗</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+const SITE_PASSWORD = "091724";
+
+/* ---------- ambient hearts ---------- */
+function spawnAmbientHearts(count = 16){
+  const wrap = document.querySelector(".ambient");
+  if(!wrap) return;
+  const symbols = ["♥","❤","💗"];
+  for(let i=0;i<count;i++){
+    const s = document.createElement("span");
+    s.textContent = symbols[Math.floor(Math.random()*symbols.length)];
+    s.style.left = Math.random()*100 + "vw";
+    s.style.setProperty("--drift-x",(Math.random()*80-40)+"px");
+    s.style.fontSize = (0.9+Math.random()*1.3)+"rem";
+    const duration = 9+Math.random()*10;
+    s.style.animationDuration = duration+"s";
+    s.style.animationDelay = (Math.random()*duration)+"s";
+    wrap.appendChild(s);
+  }
+}
+
+/* ---------- screen navigation ---------- */
+function showScreen(id){
+  document.querySelectorAll(".section").forEach(sec=>{
+    sec.classList.remove("active");
+    sec.style.display = "none";
+  });
+  const target = document.getElementById(id);
+  target.classList.add("active");
+  target.style.display = "flex";
+  window.scrollTo({top:0,behavior:"instant"});
+
+  if(id === "screen-letter"){
+    const paper = target.querySelector(".paper");
+    paper.style.animation = "none";
+    void paper.offsetWidth;
+    paper.style.animation = "";
+  }
+}
+
+document.querySelectorAll("[data-goto]").forEach(el=>{
+  el.addEventListener("click",()=> showScreen(el.getAttribute("data-goto")));
+});
+
+/* ---------- login ---------- */
+function playUnlockAnimation(){
+  const arrow = document.getElementById("cupid-arrow");
+  const heartEl = document.getElementById("locket-heart-emoji");
+  const burst = document.getElementById("impact-burst");
+  const input = document.getElementById("pw-input");
+  const button = document.querySelector(".pw-form button");
+
+  input.disabled = true;
+  button.disabled = true;
+
+  arrow.style.opacity = "0";
+  arrow.classList.remove("fly");
+  void arrow.offsetWidth; /* restart animation */
+  arrow.classList.add("fly");
+
+  arrow.addEventListener("animationend", function onFly(){
+    arrow.removeEventListener("animationend", onFly);
+    arrow.classList.remove("fly");
+    arrow.style.opacity = "0";
+
+    heartEl.textContent = "💘";
+    heartEl.classList.remove("impact");
+    void heartEl.offsetWidth;
+    heartEl.classList.add("impact");
+
+    burst.classList.remove("show");
+    void burst.offsetWidth;
+    burst.classList.add("show");
+
+    setTimeout(function(){
+      showScreen("screen-home");
+      setTimeout(function(){
+        heartEl.textContent = "💗";
+        heartEl.classList.remove("impact");
+        burst.classList.remove("show");
+        input.disabled = false;
+        button.disabled = false;
+        input.value = "";
+      }, 400);
+    }, 550);
+  }, {once:true});
+}
+
+document.getElementById("login-form").addEventListener("submit", function(e){
+  e.preventDefault();
+  const input = document.getElementById("pw-input");
+  const errorEl = document.getElementById("login-error");
+  if(input.value.trim() === SITE_PASSWORD){
+    errorEl.textContent = "";
+    sessionStorage.setItem("monthsary_unlocked","true");
+    playUnlockAnimation();
+  } else {
+    errorEl.textContent = "Sayop nga password, try again my love 💗";
+    input.value = "";
+    input.focus();
+    const locket = document.querySelector(".locket");
+    locket.animate([
+      {transform:"translateX(0)"},{transform:"translateX(-10px)"},
+      {transform:"translateX(10px)"},{transform:"translateX(-6px)"},{transform:"translateX(0)"}
+    ],{duration:350});
+  }
+});
+
+document.getElementById("logout-btn").addEventListener("click", function(){
+  sessionStorage.removeItem("monthsary_unlocked");
+  showScreen("screen-login");
+});
+
+/* ---------- 3D tilt ---------- */
+function enableTilt(selector, maxTilt=12){
+  document.querySelectorAll(selector).forEach(el=>{
+    el.style.transformStyle = "preserve-3d";
+    el.addEventListener("mousemove",(e)=>{
+      const rect = el.getBoundingClientRect();
+      const x = (e.clientX-rect.left)/rect.width - 0.5;
+      const y = (e.clientY-rect.top)/rect.height - 0.5;
+      el.style.transform = `rotateY(${x*maxTilt}deg) rotateX(${-y*maxTilt}deg)`;
+    });
+    el.addEventListener("mouseleave",()=>{ el.style.transform = "rotateY(0deg) rotateX(0deg)"; });
+  });
+}
+
+/* ---------- lightbox ---------- */
+function openLightbox(src){
+  document.getElementById("lightbox-img").src = src;
+  document.getElementById("lightbox").classList.add("open");
+}
+document.getElementById("lightbox-close-btn").addEventListener("click", function(){
+  document.getElementById("lightbox").classList.remove("open");
+});
+document.getElementById("lightbox").addEventListener("click", function(e){
+  if(e.target === this) this.classList.remove("open");
+});
+
+/* gallery and videos are now static HTML with explicit <img>/<source src> tags above */
+
+/* ---------- init ---------- */
+spawnAmbientHearts();
+enableTilt("#locket", 14);
+enableTilt(".tilt-card", 8);
+enableTilt(".photo-card", 6);
+
+if(sessionStorage.getItem("monthsary_unlocked") === "true"){
+  showScreen("screen-home");
+}
+</script>
+</body>
+</html>
